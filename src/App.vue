@@ -1,6 +1,12 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import SidebarLayout from './components/sidebar/Layout.vue'
+import { useLocationStore } from './stores/locations';
+import { storeToRefs } from 'pinia'
+
+const locationStore = useLocationStore()
+// const { loading } = storeToRefs(locationStore)
+
 </script>
 
 <template>
@@ -9,11 +15,15 @@ import SidebarLayout from './components/sidebar/Layout.vue'
       <div class="col-sm-6 col-md-4 col-xl-3 bg-light vh-100">
         <SidebarLayout />
       </div>
-      <div class="col-sm-6 col-md-8 col-xl-9 py-3">
+      <div class="col-sm-6 col-md-8 col-xl-9 py-3 content">
         <RouterView />
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.content {
+  position: relative;
+}
+</style>

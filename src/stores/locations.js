@@ -47,7 +47,7 @@ export const useLocationStore = defineStore('Location', () => {
                                 break;
                         }
                     },
-                    { maximumAge: 300000, timeout: 15000, enableHighAccuracy: false }
+                    { maximumAge: 300000, timeout: 5000, enableHighAccuracy: false }
                 )
             } else {
                 console.log('Geolocation not supported')
