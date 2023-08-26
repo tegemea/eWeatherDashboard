@@ -6,10 +6,10 @@ import SidebarLayout from './components/sidebar/Layout.vue'
 <template>
   <div class="container-fluid vh-100">
     <div class="row vh-100">
-      <div class="col-3 bg-light" style="height: 100%;">
+      <div class="col-sm-6 col-md-4 col-xl-3 bg-light vh-100">
         <SidebarLayout />
       </div>
-      <div class="col-9">
+      <div class="col-sm-6 col-md-8 col-xl-9 py-3">
         <RouterView />
       </div>
     </div>
