@@ -28,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@iconify/vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.1.1"],\
             ["@popperjs/core", "npm:2.11.8"],\
             ["@vitejs/plugin-vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.3.3"],\
             ["axios", "npm:1.4.0"],\
@@ -275,6 +276,38 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/@esbuild-win32-x64-npm-0.18.20-37a9ab2bda/node_modules/@esbuild/win32-x64/",\
           "packageDependencies": [\
             ["@esbuild/win32-x64", "npm:0.18.20"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@iconify/types", [\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/@iconify-types-npm-2.0.0-faa2398199-029f58542c.zip/node_modules/@iconify/types/",\
+          "packageDependencies": [\
+            ["@iconify/types", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@iconify/vue", [\
+        ["npm:4.1.1", {\
+          "packageLocation": "./.yarn/cache/@iconify-vue-npm-4.1.1-98c7b23e08-505fd96e69.zip/node_modules/@iconify/vue/",\
+          "packageDependencies": [\
+            ["@iconify/vue", "npm:4.1.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.1.1", {\
+          "packageLocation": "./.yarn/__virtual__/@iconify-vue-virtual-5f8be9ea68/0/cache/@iconify-vue-npm-4.1.1-98c7b23e08-505fd96e69.zip/node_modules/@iconify/vue/",\
+          "packageDependencies": [\
+            ["@iconify/vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.1.1"],\
+            ["@iconify/types", "npm:2.0.0"],\
+            ["@types/vue", null],\
+            ["vue", "npm:3.3.4"]\
+          ],\
+          "packagePeers": [\
+            "@types/vue",\
+            "vue"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2160,6 +2193,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["weatherdashboard", "workspace:."],\
+            ["@iconify/vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.1.1"],\
             ["@popperjs/core", "npm:2.11.8"],\
             ["@vitejs/plugin-vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.3.3"],\
             ["axios", "npm:1.4.0"],\
