@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start" : "http-server ./dist -S -C cert.pem"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
+    "http-server": "^14.1.1",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
