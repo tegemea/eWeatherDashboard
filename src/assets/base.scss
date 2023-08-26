@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&family=Ubuntu+Condensed&display=swap');
+
+$font-primary: 'Assistant', sans-serif;
+$font-thin: 'Ubuntu Condensed', sans-serif;
+
+.font-primary {
+  font-family: $font-primary;
+}
+
+.font-thin {
+  font-family: $font-thin;
+}
+
+$color-primary: #0D9DE3;
+$color-secondary: #00CCFF;
+$color-light: #ffffff;
+$color-dark: #333333;
+
+.color-primary {
+  color: $color-primary;
+}
+
+.color-secondary {
+  color: $color-secondary;
+}
+
+.bg-light {
+  background-color: $color-light;
+}
+
+.bg-dark {
+  background-color: $color-dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: $color-dark;
+  background: $color-light;
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: $font-primary;
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
