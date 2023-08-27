@@ -34,7 +34,7 @@ const locationStore = useLocationStore()
   max-height: 100vh;
 }
 
-.card {
+.border-radius-0 {
   border-radius: 0;
 }
 </style>

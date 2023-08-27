@@ -12,7 +12,7 @@ const { loading, locationsHistory } = storeToRefs(locationStore)
     <div class="col-12">
       <SearchByName />
       {{ locationsHistory.at(locationsHistory.length - 1) }}
-      {{ console.log(locationsHistory.at(locationsHistory?.length - 1)) }}
+      {{ console.log(locationsHistory?.at(locationsHistory?.length - 1)) }}
       <div v-if="locationsHistory.length">
         <h4>Recent Searches</h4>
         <hr />

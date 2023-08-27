@@ -24,6 +24,7 @@ async function handleCityChoice(lat, lon) {
         locationsHistory.value.unshift({
             name: cityNameToSearch.value, data
         })
+        cityNameToSearch.value = ''
     }
 }
 
@@ -34,8 +35,8 @@ async function handleCityChoice(lat, lon) {
         <div class="card-body p-0">
             <div class="row">
                 <div class="col-md-9 mb-2">
-                    <input type="search" v-model="cityNameToSearch" class="form-control form-control-lg"
-                        placeholder="Type city name and Enter to search" />
+                    <input type="search" @keyup.enter="handleSearchButton" v-model="cityNameToSearch"
+                        class="form-control form-control-lg" placeholder="Type city name and Enter to search" />
                 </div>
                 <div class="col-md-3 mb-2">
                     <button @click.prevent="handleSearchButton" class="btn btn-lg btn-outline-info w-100">

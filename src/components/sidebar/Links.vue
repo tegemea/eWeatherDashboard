@@ -8,5 +8,9 @@
             <Icon icon="ion:location" class="me-2" />
             Check other Locations
         </RouterLink>
+        <RouterLink to="history" class="list-group-item">
+            <Icon icon="solar:history-bold-duotone" class="me-2" />
+            View Search History
+        </RouterLink>
     </div>
 </template>
