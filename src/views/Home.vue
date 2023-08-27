@@ -1,4 +1,5 @@
 <script setup>
+import SearchByName from '../components/SearchByName.vue'
 import { useLocationStore } from '../stores/locations.js'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
@@ -17,20 +18,7 @@ onMounted(() => getMyLocation())
     <span class="mt-5">Please wait, loading...</span>
   </div>
   <div v-else>
-    <div class="card mb-4 border-0">
-      <div class="card-body p-0">
-        <div class="row">
-          <div class="col-md-9 mb-2"><input type="search" class="form-control form-control-lg"
-              placeholder="Type city name and Enter to search" /></div>
-          <div class="col-md-3 mb-2">
-            <button class="btn btn-lg btn-outline-info w-100">
-              <Icon icon="iconamoon:search-fill" />
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <SearchByName />
     <div class="card">
       <div class="card-body">
         <h3 class="color-primary">Welcome, you are now in <span class="font-thin">{{ myCityData.name }}, {{
