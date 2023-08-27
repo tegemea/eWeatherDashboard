@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, reactive, watch } from 'vue'
 import { axios } from '../configs/axios'
+import dayjs from 'dayjs'
 
 export const useLocationStore = defineStore('Location', () => {
 
@@ -148,6 +149,10 @@ export const useLocationStore = defineStore('Location', () => {
         }
     }
 
+    const getOnlyMorningData = async data => {
+        return data.list.filter(d => dayjs(d.dt_txt).format('HH:mm:ss') === '09:00:00')
+    }
+
     return {
         locationsHistory,
         myCityData,
@@ -158,7 +163,8 @@ export const useLocationStore = defineStore('Location', () => {
         loading,
         getLocation,
         getCityChoicesByName,
-        getCityWeatherData
+        getCityWeatherData,
+        getOnlyMorningData
     }
 
 })

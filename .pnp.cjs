@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.3.3"],\
             ["axios", "npm:1.4.0"],\
             ["bootstrap", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:5.3.1"],\
+            ["dayjs", "npm:1.11.9"],\
             ["http-server", "npm:14.1.1"],\
             ["pinia", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:2.1.6"],\
             ["sass", "npm:1.66.1"],\
@@ -926,6 +927,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/csstype-npm-3.1.2-cead7d99b2-e1a52e6c25.zip/node_modules/csstype/",\
           "packageDependencies": [\
             ["csstype", "npm:3.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dayjs", [\
+        ["npm:1.11.9", {\
+          "packageLocation": "./.yarn/cache/dayjs-npm-1.11.9-c47d327b7c-a4844d83dc.zip/node_modules/dayjs/",\
+          "packageDependencies": [\
+            ["dayjs", "npm:1.11.9"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2533,6 +2543,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-vue", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:4.3.3"],\
             ["axios", "npm:1.4.0"],\
             ["bootstrap", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:5.3.1"],\
+            ["dayjs", "npm:1.11.9"],\
             ["http-server", "npm:14.1.1"],\
             ["pinia", "virtual:e8638c35c774cbdd04981e2eecff96ac20f8af4262ba470f545329e45163effbebd2b77e50fc2221e0f2a843f13e700d8f0f29f385006411ad6ac3d81344ded6#npm:2.1.6"],\
             ["sass", "npm:1.66.1"],\

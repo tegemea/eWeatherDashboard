@@ -7,7 +7,7 @@ const router = useRouter()
 
 const locationStore = useLocationStore()
 const { loading, locationsHistory, cityNameToSearch, cityChoicesOnSearch } = storeToRefs(locationStore)
-const { getCityWeatherData, getCityChoicesByName } = locationStore
+const { getCityWeatherData, getCityChoicesByName, getOnlyMorningData } = locationStore
 
 async function handleSearchButton() {
     router.push('/locations')
@@ -18,11 +18,13 @@ async function handleSearchButton() {
 
 async function handleCityChoice(lat, lon) {
     const { data } = await getCityWeatherData(lat, lon)
+    const morningForecastData = await getOnlyMorningData(data)
+    console.log(morningForecastData)
     cityChoicesOnSearch.value = []
     loading.value = false
     if (!locationsHistory.value.some(l => l.name === cityNameToSearch.value)) {
         locationsHistory.value.unshift({
-            name: cityNameToSearch.value, data
+            name: cityNameToSearch.value, data: morningForecastData
         })
         cityNameToSearch.value = ''
     }
