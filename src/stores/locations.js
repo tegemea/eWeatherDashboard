@@ -8,6 +8,8 @@ export const useLocationStore = defineStore('Location', () => {
     const apiKey = ref('c6a724fc7d3ee0ec2a773e95c71bae3b')
 
     const loading = ref(false)
+    const myCityData = ref({})
+    const cityWeatherData = ref(null)
     const locationsHistory = ref([])
     const coordinates = reactive({
         latitute: null,
@@ -19,11 +21,14 @@ export const useLocationStore = defineStore('Location', () => {
         try {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    ({ coords }) => {
+                    async ({ coords }) => {
                         if (coords) {
                             coordinates.latitute = coords.latitude
                             coordinates.longitude = coords.longitude
-                            getWeatherData(coords.latitude, coords.longitude)
+                            const { data: theCityData } = await getCityName(coords.latitude, coords.longitude)
+                            myCityData.value = theCityData[0]
+                            const { data: theCityWeatherData } = await getWeatherData(coords.latitude, coords.longitude)
+                            cityWeatherData.value = theCityWeatherData
                             loading.value = false
                         }
                     },
@@ -57,12 +62,27 @@ export const useLocationStore = defineStore('Location', () => {
         }
     }
 
-    const getWeatherData = async (lat, lon) => {
-        console.log('lat : ', lat)
-        console.log('lon : ', lon)
+    const getCityName = async (lat, lon) => {
         try {
-            const res = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
-            console.log(res)
+            return axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${apiKey.value}`)
+        } catch (e) {
+            if (e.response) {
+                // response error here
+                console.log('Sorry, response error', e.response)
+            } else if (e.request) {
+                // request error
+                console.log('Sorry, request error', e.request)
+            } else {
+                // general error
+                // console.log(e.message)
+            }
+            // console.log(e.config)
+        }
+    }
+
+    const getWeatherData = async (lat, lon) => {
+        try {
+            return await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
         } catch (e) {
             if (e.response) {
                 // response error here
@@ -80,6 +100,8 @@ export const useLocationStore = defineStore('Location', () => {
 
     return {
         locationsHistory,
+        myCityData,
+        cityWeatherData,
         coordinates,
         loading,
         getMyLocation
