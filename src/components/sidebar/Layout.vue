@@ -17,7 +17,7 @@ import LinksToPages from './Links.vue'
                 </div>
             </div>
             <div class="card mb-3">
-                <div class="card-body">
+                <div class="card-body p-0">
                     <LinksToPages />
                 </div>
             </div>

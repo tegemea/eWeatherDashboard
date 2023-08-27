@@ -22,7 +22,7 @@ const locationStore = useLocationStore()
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @media screen and (min-width: 768px) {
   .sidebar {
     height: 100vh;
@@ -31,5 +31,9 @@ const locationStore = useLocationStore()
 
 .content {
   position: relative;
+}
+
+.card {
+  border-radius: 0;
 }
 </style>
