@@ -21,7 +21,7 @@ async function handleCityChoice(lat, lon) {
     cityChoicesOnSearch.value = []
     loading.value = false
     if (!locationsHistory.value.some(l => l.name === cityNameToSearch.value)) {
-        locationsHistory.value.push({
+        locationsHistory.value.unshift({
             name: cityNameToSearch.value, data
         })
     }
