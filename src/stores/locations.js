@@ -23,7 +23,7 @@ export const useLocationStore = defineStore('Location', () => {
                         if (coords) {
                             coordinates.latitute = coords.latitude
                             coordinates.longitude = coords.longitude
-                            getWeatherData(coordinates.latitude, coordinates.longitude)
+                            getWeatherData(coords.latitude, coords.longitude)
                             loading.value = false
                         }
                     },
@@ -47,10 +47,10 @@ export const useLocationStore = defineStore('Location', () => {
                                 break;
                         }
                     },
-                    { maximumAge: 300000, timeout: 5000, enableHighAccuracy: false }
+                    { maximumAge: Infinity, timeout: 5000, enableHighAccuracy: true }
                 )
             } else {
-                console.log('Geolocation not supported')
+                console.log('Geolocation not supported by this browser')
             }
         } catch (e) {
             console.log(e)
@@ -58,9 +58,11 @@ export const useLocationStore = defineStore('Location', () => {
     }
 
     const getWeatherData = async (lat, lon) => {
+        console.log('lat : ', lat)
+        console.log('lon : ', lon)
         try {
-            await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
-            // console.log(res)
+            const res = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            console.log(res)
         } catch (e) {
             if (e.response) {
                 // response error here

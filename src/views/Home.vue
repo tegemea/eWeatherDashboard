@@ -13,7 +13,7 @@ onMounted(() => getMyLocation())
 
 <template>
   <div v-if="loading" class="overlay">
-    <Icon icon="svg-spinners:12-dots-scale-rotate" :style="{ color: '#0D9DE3' }" :height="100" />
+    <Icon icon="svg-spinners:ring-resize" :style="{ color: '#0D9DE3' }" :height="100" />
     <span class="mt-5">Please wait, loading...</span>
   </div>
   <div v-else>Location : {{ coordinates }}</div>
