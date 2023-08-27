@@ -6,9 +6,9 @@ import { onMounted } from 'vue'
 
 const locationStore = useLocationStore()
 const { locationsHistory, myCityData, cityWeatherData, coordinates, loading } = storeToRefs(locationStore)
-const { getMyLocation } = locationStore
+const { getLocation } = locationStore
 
-onMounted(() => getMyLocation())
+onMounted(() => getLocation())
 
 </script>
 

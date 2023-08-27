@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { axios } from '../configs/axios'
 
 export const useLocationStore = defineStore('Location', () => {
@@ -10,13 +10,20 @@ export const useLocationStore = defineStore('Location', () => {
     const loading = ref(false)
     const myCityData = ref({})
     const cityWeatherData = ref(null)
+    const cityChoicesOnSearch = ref([])
     const locationsHistory = ref([])
+    const cityNameToSearch = ref('')
     const coordinates = reactive({
         latitute: null,
         longitude: null
     })
 
-    const getMyLocation = () => {
+    watch(
+        cityNameToSearch,
+        v => { if (!v.length) cityChoicesOnSearch.value = [] }
+    )
+
+    const getLocation = () => {
         loading.value = true
         try {
             if (navigator.geolocation) {
@@ -98,13 +105,60 @@ export const useLocationStore = defineStore('Location', () => {
         }
     }
 
+    const getCityChoicesByName = async (city) => {
+        loading.value = true;
+        try {
+            return await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=5&appid=${apiKey.value}`)
+            // return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?cnt=5&q=${city.value}&appid=${apiKey.value}`)
+        } catch (e) {
+            if (e.response) {
+                // response error here
+                console.log('Sorry, response error', e.response)
+                loading.value = false
+            } else if (e.request) {
+                // request error
+                console.log('Sorry, request error', e.request)
+                loading.value = false
+            } else {
+                // general error
+                // console.log(e.message)
+                loading.value = false
+            }
+            // console.log(e.config)
+        }
+    }
+
+    const getCityWeatherData = async (lat, lon) => {
+        loading.value = true;
+        try {
+            return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            // return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?cnt=5&q=${city.value}&appid=${apiKey.value}`)
+        } catch (e) {
+            if (e.response) {
+                // response error here
+                console.log('Sorry, response error', e.response)
+            } else if (e.request) {
+                // request error
+                console.log('Sorry, request error', e.request)
+            } else {
+                // general error
+                // console.log(e.message)
+            }
+            // console.log(e.config)
+        }
+    }
+
     return {
         locationsHistory,
         myCityData,
+        cityNameToSearch,
         cityWeatherData,
         coordinates,
+        cityChoicesOnSearch,
         loading,
-        getMyLocation
+        getLocation,
+        getCityChoicesByName,
+        getCityWeatherData
     }
 
 })

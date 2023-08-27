@@ -31,6 +31,7 @@ const locationStore = useLocationStore()
 
 .content {
   position: relative;
+  max-height: 100vh;
 }
 
 .card {
