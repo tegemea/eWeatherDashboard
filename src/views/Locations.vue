@@ -13,13 +13,6 @@ const { loading, locationsHistory } = storeToRefs(locationStore)
       <SearchByName />
       {{ locationsHistory.at(locationsHistory.length - 1) }}
       {{ console.log(locationsHistory?.at(locationsHistory?.length - 1)) }}
-      <div v-if="locationsHistory.length">
-        <h4>Recent Searches</h4>
-        <hr />
-        <ul class="list-unstyled">
-          <li v-for="(location, i) in locationsHistory" :key="i">{{ i + 1 }}. {{ location.name }}</li>
-        </ul>
-      </div>
     </div>
   </div>
 </template>

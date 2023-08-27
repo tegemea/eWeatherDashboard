@@ -36,7 +36,7 @@ const { loading, locationsHistory: locations } = storeToRefs(locationStore)
             </div>
         </div>
         <div class="card-footer">
-            <small class="text-black-50">Data not persistent, will vanish upon browser refresh</small>
+            <small class="text-danger">Data not persistent, will vanish upon browser refresh</small>
         </div>
     </div>
 </template>

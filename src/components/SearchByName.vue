@@ -51,7 +51,7 @@ async function handleCityChoice(lat, lon) {
             <span class="mt-5">Please wait, loading...</span>
         </div>
         <div v-else-if="cityChoicesOnSearch.length" class="card-body">
-            <h5 v-if="cityChoicesOnSearch.length > 1">Which {{ cityNameToSearch }} did you mean? Choose among below</h5>
+            <h5 v-if="cityChoicesOnSearch.length > 1">Which {{ cityNameToSearch }} do you mean? Choose among below</h5>
             <h5 v-else>Confirm the choice below</h5>
             <button @click.prevent="handleCityChoice(cityChoice.lat, cityChoice.lon)"
                 v-for="(cityChoice, i) in cityChoicesOnSearch" class="btn btn-lg btn-outline-secondary me-3 my-2" :key="i">
