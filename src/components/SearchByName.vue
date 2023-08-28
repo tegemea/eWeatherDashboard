@@ -17,14 +17,15 @@ async function handleSearchButton() {
 }
 
 async function handleCityChoice(lat, lon) {
-    const { data } = await getCityWeatherData(lat, lon)
-    const morningForecastData = await getOnlyMorningData(data)
-    console.log(morningForecastData)
+    const { cityForecast, cityCurrentWeather } = await getCityWeatherData(lat, lon)
+    const morningForecastData = await getOnlyMorningData(cityForecast)
     cityChoicesOnSearch.value = []
     loading.value = false
     if (!locationsHistory.value.some(l => l.name === cityNameToSearch.value)) {
         locationsHistory.value.unshift({
-            name: cityNameToSearch.value, data: morningForecastData
+            name: cityNameToSearch.value,
+            data: morningForecastData,
+            current: cityCurrentWeather
         })
         cityNameToSearch.value = ''
     }
@@ -80,7 +81,8 @@ async function handleCityChoice(lat, lon) {
         justify-content: center;
         align-items: center;
         background-color: rgba(#fff, .3);
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(10px);
+        z-index: 10;
     }
 }
 </style>

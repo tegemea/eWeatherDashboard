@@ -4,7 +4,13 @@ import { useLocationStore } from '../stores/locations';
 import { storeToRefs } from 'pinia'
 
 const locationStore = useLocationStore()
-const { loading, locationsHistory: locations } = storeToRefs(locationStore)
+const { locationsHistory: locations } = storeToRefs(locationStore)
+
+function removeLocationinHistory(i) {
+    if (confirm('Aare you sure you want to remove this record?')) {
+        locations.value.splice(i, 1)
+    }
+}
 </script>
 
 <template>
@@ -17,19 +23,26 @@ const { loading, locationsHistory: locations } = storeToRefs(locationStore)
                     <thead>
                         <tr class="text-uppercase font-thin">
                             <th>Location</th>
-                            <th>Data 1</th>
-                            <th>Data 2</th>
-                            <th>Data 3</th>
-                            <th>Data 4</th>
+                            <th>Weather</th>
+                            <th>HIGH</th>
+                            <th>LOW</th>
+                            <th class="text-danger">Remove</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(location, i) in locations" :key="i">
-                            <td>{{ location.name }}</td>
-                            <td>Data 1</td>
-                            <td>Data 2</td>
-                            <td>Data 3</td>
-                            <td>Data 4</td>
+                            <td>{{ location.name }}, {{ location.data?.city?.country }}</td>
+                            <td>
+                                <img :src="`https://openweathermap.org/img/wn/${location.current?.weather[0]?.icon}.png`" />
+                                {{ location.current?.weather[0]?.main }}
+                            </td>
+                            <td>{{ location.current?.main?.temp_max }}</td>
+                            <td>{{ location.current?.main?.temp_min }}</td>
+                            <td>
+                                <button @click="removeLocationinHistory(i)" class="btn text-danger">
+                                    <Icon icon="bi:trash" />
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -39,4 +52,5 @@ const { loading, locationsHistory: locations } = storeToRefs(locationStore)
             <small class="text-danger">Data not persistent, will vanish upon browser refresh</small>
         </div>
     </div>
+    <h5 v-else class="text-danger">Sorry, no search history!</h5>
 </template>

@@ -132,8 +132,9 @@ export const useLocationStore = defineStore('Location', () => {
     const getCityWeatherData = async (lat, lon) => {
         loading.value = true;
         try {
-            return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
-            // return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?cnt=5&q=${city.value}&appid=${apiKey.value}`)
+            const { data: cityForecast } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            const { data: cityCurrentWeather } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            return { cityForecast, cityCurrentWeather }
         } catch (e) {
             if (e.response) {
                 // response error here
@@ -149,8 +150,8 @@ export const useLocationStore = defineStore('Location', () => {
         }
     }
 
-    const getOnlyMorningData = async data => {
-        return data.list.filter(d => dayjs(d.dt_txt).format('HH:mm:ss') === '09:00:00')
+    const getOnlyMorningData = data => {
+        return { city: data.city, forecasts: data.list.filter(d => dayjs(d.dt_txt).format('HH:mm:ss') === '09:00:00') }
     }
 
     return {
