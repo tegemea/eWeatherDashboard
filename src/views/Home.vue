@@ -25,12 +25,38 @@ onMounted(() => getLocation())
           myCityData.country }}</span></h3>
         <hr />
         <div class="row">
-          <div class="col-md-6 text-black-50">
-            <h4>Temperature : {{ cityWeatherData?.current?.temp.toFixed('2') }} {{ tempUnits }}</h4>
-            <h4>Humidity : {{ cityWeatherData?.current?.humidity }} {{ humidUnits }}</h4>
-            <h4>Wind Speed : {{ cityWeatherData?.current?.wind_speed }} {{ windSpeedUnits }}</h4>
+          <div class="col-md-4 text-black-50">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h4 class="d-flex justify-content-between">
+                  <span>
+                    <Icon icon="fluent:temperature-16-regular" class="me-2" />
+                    Temperature
+                  </span>
+                  <span>{{ cityWeatherData?.current?.temp.toFixed('2') }} {{ tempUnits }}</span>
+                </h4>
+              </li>
+              <li class="list-group-item">
+                <h4 class="d-flex justify-content-between">
+                  <span>
+                    <Icon icon="carbon:humidity" class="me-2" />
+                    Humidity
+                  </span>
+                  <span>{{ cityWeatherData?.current?.humidity }} {{ humidUnits }}</span>
+                </h4>
+              </li>
+              <li class="list-group-item">
+                <h4 class="d-flex justify-content-between">
+                  <span>
+                    <Icon icon="solar:wind-linear" class="me-2" />
+                    Wind Speed
+                  </span>
+                  <span>{{ cityWeatherData?.current?.wind_speed }} {{ windSpeedUnits }}</span>
+                </h4>
+              </li>
+            </ul>
           </div>
-          <div class="col-md-6 text-center">
+          <div class="col-md-4 text-end">
             <img :src="`https://openweathermap.org/img/wn/${cityWeatherData?.current?.weather[0]?.icon}@2x.png`" alt="" />
             <span>{{ cityWeatherData?.current?.weather[0]?.main }}</span>
           </div>

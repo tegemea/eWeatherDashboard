@@ -60,12 +60,38 @@ const chartOptions = {
           </h3>
           <hr />
           <div class="row">
-            <div class="col-md-6 text-black-50">
-              <h4>Temperature : {{ locations[0]?.current?.main?.temp.toFixed('2') }} {{ tempUnits }}</h4>
-              <h4>Humidity : {{ locations[0]?.current?.main?.humidity }} {{ humidUnits }}</h4>
-              <h4>Wind Speed : {{ locations[0]?.current?.wind?.speed }} {{ windSpeedUnits }}</h4>
+            <div class="col-md-4 text-black-50">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h4 class="d-flex justify-content-between">
+                    <span>
+                      <Icon icon="fluent:temperature-16-regular" class="me-2" />
+                      Temperature
+                    </span>
+                    <span>{{ locations[0]?.current?.main?.temp.toFixed('2') }} {{ tempUnits }}</span>
+                  </h4>
+                </li>
+                <li class="list-group-item">
+                  <h4 class="d-flex justify-content-between">
+                    <span>
+                      <Icon icon="carbon:humidity" class="me-2" />
+                      Humidity
+                    </span>
+                    <span>{{ locations[0]?.current?.main?.humidity }} {{ humidUnits }}</span>
+                  </h4>
+                </li>
+                <li class="list-group-item">
+                  <h4 class="d-flex justify-content-between">
+                    <span>
+                      <Icon icon="solar:wind-linear" class="me-2" />
+                      Wind Speed
+                    </span>
+                    <span>{{ locations[0]?.current?.wind?.speed }} {{ windSpeedUnits }}</span>
+                  </h4>
+                </li>
+              </ul>
             </div>
-            <div class="col-md-6 text-center">
+            <div class="col-md-4 text-end">
               <img :src="`https://openweathermap.org/img/wn/${locations[0]?.current?.weather[0]?.icon}@2x.png`" alt="" />
               <span>{{ locations[0]?.current?.weather[0]?.main }}</span>
             </div>
