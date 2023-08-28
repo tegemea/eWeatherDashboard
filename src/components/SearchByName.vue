@@ -10,6 +10,10 @@ const { loading, locationsHistory, cityNameToSearch, cityChoicesOnSearch, errors
 const { getCityWeatherData, getCityChoicesByName, getOnlyMorningData } = locationStore
 
 async function handleSearchButton() {
+    if (!cityNameToSearch.value.length) {
+        errors.value.push('Please enter city / location to search');
+        return;
+    }
     router.push('/locations')
     const { data: cityChoices } = await getCityChoicesByName(cityNameToSearch)
     if (!cityChoices.length) {
@@ -49,7 +53,8 @@ async function handleCityChoice(lat, lon) {
                         class="form-control form-control-lg" placeholder="Type city name and Enter to search" />
                 </div>
                 <div class="col-md-4 mb-2">
-                    <button @click.prevent="handleSearchButton" class="btn btn-lg btn-outline-info w-100">
+                    <button @click.prevent="handleSearchButton" class="btn btn-lg btn-outline-info w-100"
+                        :disabled="!cityNameToSearch.length">
                         <span class="d-md-none d-lg-inline">
                             <Icon icon="iconamoon:search-fill" class="me-2" />
                         </span>
