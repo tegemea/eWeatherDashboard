@@ -122,7 +122,7 @@ const chartOptions = {
               <tr v-for="forecast in locations[0]?.data?.forecasts">
                 <td>{{ dayjs(forecast.dt_txt).format('DD MMM YYYY, ddd - HH:mm A') }}</td>
                 <td class="text-center">
-                  <img :src="`http://openweathermap.org/img/wn/${forecast.weather[0]?.icon}.png`" alt="" />
+                  <img :src="`https://openweathermap.org/img/wn/${forecast.weather[0]?.icon}.png`" alt="" />
                   {{ forecast.weather[0]?.main }}
                 </td>
                 <td>{{ forecast.main?.temp_min.toFixed('2') }} {{ tempUnits }}</td>

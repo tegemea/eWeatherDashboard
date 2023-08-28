@@ -78,7 +78,7 @@ export const useLocationStore = defineStore('Location', () => {
 
     const getCityName = async (lat, lon) => {
         try {
-            return axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${apiKey.value}`)
+            return axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${apiKey.value}`)
         } catch (e) {
             if (e.response) {
                 // response error here
@@ -119,7 +119,7 @@ export const useLocationStore = defineStore('Location', () => {
     const getCityChoicesByName = async (city) => {
         loading.value = true;
         try {
-            return await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=5&appid=${apiKey.value}`)
+            return await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=5&appid=${apiKey.value}`)
         } catch (e) {
             if (e.response) {
                 // response error here
