@@ -4,7 +4,7 @@ import { useLocationStore } from '../stores/locations';
 import { storeToRefs } from 'pinia'
 
 const locationStore = useLocationStore()
-const { locationsHistory: locations } = storeToRefs(locationStore)
+const { locationsHistory: locations, tempUnits } = storeToRefs(locationStore)
 
 function removeLocationinHistory(i) {
     if (confirm('Aare you sure you want to remove this record?')) {
@@ -38,8 +38,8 @@ function removeLocationinHistory(i) {
                                 <img :src="`https://openweathermap.org/img/wn/${location.current?.weather[0]?.icon}.png`" />
                                 {{ location.current?.weather[0]?.main }}
                             </td>
-                            <td>{{ location.current?.main?.temp_max }}</td>
-                            <td>{{ location.current?.main?.temp_min }}</td>
+                            <td>{{ location.current?.main?.temp_max.toFixed('2') }} {{ tempUnits }}</td>
+                            <td>{{ location.current?.main?.temp_min.toFixed('2') }} {{ tempUnits }}</td>
                             <td class="text-center">
                                 <button @click="removeLocationinHistory(i)" class="btn text-danger">
                                     <Icon icon="bi:trash" />

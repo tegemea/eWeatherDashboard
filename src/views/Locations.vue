@@ -10,7 +10,7 @@ import { watch } from 'vue'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, Colors)
 
 const locationStore = useLocationStore()
-const { locationsHistory: locations } = storeToRefs(locationStore)
+const { locationsHistory: locations, tempUnits, humidUnits, windSpeedUnits } = storeToRefs(locationStore)
 
 let chartData = {};
 watch(
@@ -18,7 +18,7 @@ watch(
   v => {
     if (v.length) {
       chartData = {
-        labels: [...v[0]?.data?.forecasts?.map(f => dayjs(f.dt_txt).format('DD MMM'))],
+        labels: [...v[0]?.data?.forecasts?.map(f => dayjs(f.dt_txt).format('ddd, DD MMM'))],
         datasets: [{ data: [...v[0]?.data?.forecasts?.map(f => f.main?.temp_max)], label: 'Day Forecast' }]
       }
     } else {
@@ -61,9 +61,9 @@ const chartOptions = {
           <hr />
           <div class="row">
             <div class="col-md-6 text-black-50">
-              <h4>Temperature : {{ locations[0]?.current?.main?.temp }}</h4>
-              <h4>Humidity : {{ locations[0]?.current?.main?.humidity }}</h4>
-              <h4>Wind Speed : {{ locations[0]?.current?.wind?.speed }}</h4>
+              <h4>Temperature : {{ locations[0]?.current?.main?.temp.toFixed('2') }} {{ tempUnits }}</h4>
+              <h4>Humidity : {{ locations[0]?.current?.main?.humidity }} {{ humidUnits }}</h4>
+              <h4>Wind Speed : {{ locations[0]?.current?.wind?.speed }} {{ windSpeedUnits }}</h4>
             </div>
             <div class="col-md-6 text-center">
               <img :src="`https://openweathermap.org/img/wn/${locations[0]?.current?.weather[0]?.icon}@2x.png`" alt="" />
@@ -99,8 +99,8 @@ const chartOptions = {
                   <img :src="`http://openweathermap.org/img/wn/${forecast.weather[0]?.icon}.png`" alt="" />
                   {{ forecast.weather[0]?.main }}
                 </td>
-                <td>{{ forecast.main?.temp_min }}</td>
-                <td>{{ forecast.main?.temp_max }}</td>
+                <td>{{ forecast.main?.temp_min.toFixed('2') }} {{ tempUnits }}</td>
+                <td>{{ forecast.main?.temp_max.toFixed('2') }} {{ tempUnits }}</td>
               </tr>
             </tbody>
           </table>
@@ -110,9 +110,8 @@ const chartOptions = {
         </div>
       </div>
       <h5 v-else class="text-danger mb-4">Sorry, not last search!</h5>
-
       <div v-if="chartData?.labels?.length" class="card mb-4">
-        <h5 class="card-header">Graph Representation of Temperature differences</h5>
+        <h5 class="card-header">Graph representation of next 5 days temperature variations in {{ locations[0].name }}</h5>
         <div class="card-body">
           <Bar :data="chartData" :options="chartOptions" />
         </div>

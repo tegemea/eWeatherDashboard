@@ -10,8 +10,8 @@ const locationStore = useLocationStore()
 </script>
 
 <template>
-  <div class="container-fluid vh-100">
-    <div class="row vh-100">
+  <div class="container-fluid min-vh-100">
+    <div class="row min-vh-100">
       <div class="col-sm-6 col-md-4 col-xl-3 bg-light sidebar-container">
         <SidebarLayout class="sidebar" />
       </div>
@@ -24,10 +24,7 @@ const locationStore = useLocationStore()
 
 <style lang="scss">
 @media screen and (min-width: 768px) {
-  .sidebar-container {
-    // height: 100vh;
-    // background: red;
-  }
+  .sidebar-container {}
 
   .sidebar {
     position: sticky;
@@ -38,7 +35,6 @@ const locationStore = useLocationStore()
 
 .content {
   position: relative;
-  max-height: 100vh;
 }
 
 .border-radius-0 {

@@ -11,6 +11,9 @@ export const useLocationStore = defineStore('Location', () => {
     const errors = ref([])
 
     const loading = ref(false)
+    const tempUnits = ref('ºC')
+    const humidUnits = ref('RH')
+    const windSpeedUnits = ref('m/s')
     const myCityData = ref({})
     const cityWeatherData = ref(null)
     const cityChoicesOnSearch = ref([])
@@ -172,6 +175,9 @@ export const useLocationStore = defineStore('Location', () => {
     return {
         locationsHistory,
         myCityData,
+        tempUnits,
+        windSpeedUnits,
+        humidUnits,
         cityNameToSearch,
         cityWeatherData,
         coordinates,

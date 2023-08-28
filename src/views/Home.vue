@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 
 const locationStore = useLocationStore()
-const { myCityData, cityWeatherData, loading } = storeToRefs(locationStore)
+const { myCityData, cityWeatherData, loading, tempUnits, humidUnits, windSpeedUnits } = storeToRefs(locationStore)
 const { getLocation } = locationStore
 
 onMounted(() => getLocation())
@@ -26,9 +26,9 @@ onMounted(() => getLocation())
         <hr />
         <div class="row">
           <div class="col-md-6 text-black-50">
-            <h4>Temperature : {{ cityWeatherData?.current?.temp }}</h4>
-            <h4>Humidity : {{ cityWeatherData?.current?.humidity }}</h4>
-            <h4>Wind Speed : {{ cityWeatherData?.current?.wind_speed }}</h4>
+            <h4>Temperature : {{ cityWeatherData?.current?.temp.toFixed('2') }} {{ tempUnits }}</h4>
+            <h4>Humidity : {{ cityWeatherData?.current?.humidity }} {{ humidUnits }}</h4>
+            <h4>Wind Speed : {{ cityWeatherData?.current?.wind_speed }} {{ windSpeedUnits }}</h4>
           </div>
           <div class="col-md-6 text-center">
             <img :src="`https://openweathermap.org/img/wn/${cityWeatherData?.current?.weather[0]?.icon}@2x.png`" alt="" />

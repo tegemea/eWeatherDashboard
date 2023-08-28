@@ -1,6 +1,7 @@
 <script setup>
 import SiteTitle from './SiteTitle.vue'
 import LinksToPages from './Links.vue'
+import UnitSelections from '../UnitSelections.vue'
 import MostRecentSearches from '../MostRecentSearches.vue';
 import { useLocationStore } from '../../stores/locations';
 import { storeToRefs } from 'pinia'
@@ -18,6 +19,20 @@ const { locationsHistory } = storeToRefs(locationStore)
                 </div>
             </div>
             <div class="card mb-3">
+                <strong class="card-header">
+                    <Icon icon="fluent:temperature-16-regular" class="me-2" />
+                    Change Temperate Units
+                </strong>
+                <div class="card-body p-0">
+                    <UnitSelections />
+                </div>
+                <div class="card-footer text-danger small">
+                    <Icon icon="streamline:interface-alert-warning-circle-warning-alert-frame-exclamation-caution-circle"
+                        class="me-2" />
+                    Values not being re-calculated
+                </div>
+            </div>
+            <div class="card mb-3 border-radius-0">
                 <div class="card-body p-0">
                     <LinksToPages />
                 </div>
