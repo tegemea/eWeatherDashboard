@@ -95,7 +95,7 @@ export const useLocationStore = defineStore('Location', () => {
 
     const getWeatherData = async (lat, lon) => {
         try {
-            return await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            return await axios.get(`https://api.openweathermap.org/data/3.0/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
         } catch (e) {
             if (e.response) {
                 // response error here
@@ -137,8 +137,12 @@ export const useLocationStore = defineStore('Location', () => {
     const getCityWeatherData = async (lat, lon) => {
         loading.value = true;
         try {
-            const { data: cityForecast } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
-            const { data: cityCurrentWeather } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            const {
+                data: cityForecast
+            } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
+            const {
+                data: cityCurrentWeather
+            } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey.value}`)
             return { cityForecast, cityCurrentWeather }
         } catch (e) {
             if (e.response) {

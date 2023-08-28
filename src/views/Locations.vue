@@ -3,9 +3,45 @@ import SearchByName from '../components/SearchByName.vue';
 import { useLocationStore } from '../stores/locations';
 import { storeToRefs } from 'pinia'
 import dayjs from 'dayjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors } from 'chart.js'
+import { Bar } from 'vue-chartjs'
+import { watch } from 'vue'
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, Colors)
 
 const locationStore = useLocationStore()
-const { loading, locationsHistory: locations } = storeToRefs(locationStore)
+const { locationsHistory: locations } = storeToRefs(locationStore)
+
+let chartData = {};
+watch(
+  locations.value,
+  v => {
+    if (v.length) {
+      chartData = {
+        labels: [...v[0]?.data?.forecasts?.map(f => dayjs(f.dt_txt).format('DD MMM'))],
+        datasets: [{ data: [...v[0]?.data?.forecasts?.map(f => f.main?.temp_max)], label: 'Day Forecast' }]
+      }
+    } else {
+      chartData = {
+        labels: [],
+        datasets: []
+      }
+    }
+  }
+)
+
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: true,
+      labels: {
+        color: '#333'
+      }
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -39,7 +75,7 @@ const { loading, locationsHistory: locations } = storeToRefs(locationStore)
           <span class="text-black-50">{{ locations[0]?.current?.weather[0]?.description }}</span>
         </div>
       </div>
-      <div v-if="locations.length" class="card">
+      <div v-if="locations.length" class="card mb-4">
         <h5 class="card-header d-flex justify-content-between">
           <span>Last City Forecast</span>
           <strong>{{ locations[0]?.name }} ({{ locations[0]?.data?.city?.name }}) 5 Days Forecast
@@ -73,7 +109,14 @@ const { loading, locationsHistory: locations } = storeToRefs(locationStore)
           Data not persistent, will vanish upon browser refresh
         </div>
       </div>
-      <h5 v-else class="text-danger">Sorry, not last search!</h5>
+      <h5 v-else class="text-danger mb-4">Sorry, not last search!</h5>
+
+      <div v-if="chartData?.labels?.length" class="card mb-4">
+        <h5 class="card-header">Graph Representation of Temperature differences</h5>
+        <div class="card-body">
+          <Bar :data="chartData" :options="chartOptions" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
