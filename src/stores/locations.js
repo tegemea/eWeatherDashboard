@@ -8,6 +8,8 @@ export const useLocationStore = defineStore('Location', () => {
     // hard-coded open weather map api key
     const apiKey = ref('c6a724fc7d3ee0ec2a773e95c71bae3b')
 
+    const errors = ref([])
+
     const loading = ref(false)
     const myCityData = ref({})
     const cityWeatherData = ref(null)
@@ -43,19 +45,20 @@ export const useLocationStore = defineStore('Location', () => {
                     error => {
                         switch (error.code) {
                             case error.PERMISSION_DENIED:
-                                console.log("User denied the request for Geolocation.")
+                                errors.value.push('Sorry, User denied the request for Geolocation.')
                                 loading.value = false
                                 break;
                             case error.POSITION_UNAVAILABLE:
-                                console.log("Location information is unavailable.")
+                                errors.value.push('Sorry, Location information is unavailable.')
                                 loading.value = false
                                 break;
                             case error.TIMEOUT:
-                                console.log("The request to get user location timed out.")
+                                errors.value.push('Sorry, The request to get user location timed out.')
                                 loading.value = false
                                 break;
                             case error.UNKNOWN_ERROR:
                                 console.log("An unknown error occurred.")
+                                errors.value.push('Sorry, An unknown error occurred. Our Engineers are working on it.')
                                 loading.value = false
                                 break;
                         }
@@ -63,7 +66,7 @@ export const useLocationStore = defineStore('Location', () => {
                     { maximumAge: Infinity, timeout: 5000, enableHighAccuracy: true }
                 )
             } else {
-                console.log('Geolocation not supported by this browser')
+                errors.value.push('Geolocation not supported by this browser')
             }
         } catch (e) {
             console.log(e)
@@ -76,15 +79,17 @@ export const useLocationStore = defineStore('Location', () => {
         } catch (e) {
             if (e.response) {
                 // response error here
-                console.log('Sorry, response error', e.response)
+                errors.value.push(`Sorry, there is an error. Error : ${e.response}`)
+                loading.value = false
             } else if (e.request) {
                 // request error
-                console.log('Sorry, request error', e.request)
+                errors.value.push(`Sorry, there is an error. Error :  ${e.request}`)
+                loading.value = false
             } else {
                 // general error
-                // console.log(e.message)
+                errors.value.push(e)
+                loading.value = false
             }
-            // console.log(e.config)
         }
     }
 
@@ -94,15 +99,17 @@ export const useLocationStore = defineStore('Location', () => {
         } catch (e) {
             if (e.response) {
                 // response error here
-                console.log('Sorry, response error', e.response)
+                errors.value.push(`Sorry, there is an error. Error : ${e.response}`)
+                loading.value = false
             } else if (e.request) {
                 // request error
-                console.log('Sorry, request error', e.request)
+                errors.value.push(`Sorry, there is an error. Error :  ${e.request}`)
+                loading.value = false
             } else {
                 // general error
-                // console.log(e.message)
+                errors.value.push(e)
+                loading.value = false
             }
-            // console.log(e.config)
         }
     }
 
@@ -110,22 +117,20 @@ export const useLocationStore = defineStore('Location', () => {
         loading.value = true;
         try {
             return await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=5&appid=${apiKey.value}`)
-            // return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?cnt=5&q=${city.value}&appid=${apiKey.value}`)
         } catch (e) {
             if (e.response) {
                 // response error here
-                console.log('Sorry, response error', e.response)
+                errors.value.push(`Sorry, there is an error. Error : ${e.response}`)
                 loading.value = false
             } else if (e.request) {
                 // request error
-                console.log('Sorry, request error', e.request)
+                errors.value.push(`Sorry, there is an error. Error :  ${e.request}`)
                 loading.value = false
             } else {
                 // general error
-                // console.log(e.message)
+                errors.value.push(e)
                 loading.value = false
             }
-            // console.log(e.config)
         }
     }
 
@@ -138,20 +143,26 @@ export const useLocationStore = defineStore('Location', () => {
         } catch (e) {
             if (e.response) {
                 // response error here
-                console.log('Sorry, response error', e.response)
+                errors.value.push(`Sorry, there is an error. Error : ${e.response}`)
+                loading.value = false
             } else if (e.request) {
                 // request error
-                console.log('Sorry, request error', e.request)
+                errors.value.push(`Sorry, there is an error. Error :  ${e.request}`)
+                loading.value = false
             } else {
                 // general error
-                // console.log(e.message)
+                errors.value.push(e.message)
+                loading.value = false
             }
-            // console.log(e.config)
         }
     }
 
     const getOnlyMorningData = data => {
-        return { city: data.city, forecasts: data.list.filter(d => dayjs(d.dt_txt).format('HH:mm:ss') === '09:00:00') }
+        try {
+            return { city: data.city, forecasts: data.list.filter(d => dayjs(d.dt_txt).format('HH:mm:ss') === '09:00:00') }
+        } catch (e) {
+            errors.value.push(`Sorry, there is an error. Error : ${e.message}`)
+        }
     }
 
     return {
@@ -162,6 +173,7 @@ export const useLocationStore = defineStore('Location', () => {
         coordinates,
         cityChoicesOnSearch,
         loading,
+        errors,
         getLocation,
         getCityChoicesByName,
         getCityWeatherData,

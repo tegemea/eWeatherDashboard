@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 
 const locationStore = useLocationStore()
-const { locationsHistory, myCityData, cityWeatherData, coordinates, loading } = storeToRefs(locationStore)
+const { myCityData, cityWeatherData, loading } = storeToRefs(locationStore)
 const { getLocation } = locationStore
 
 onMounted(() => getLocation())
@@ -19,7 +19,7 @@ onMounted(() => getLocation())
   </div>
   <div v-else>
     <SearchByName />
-    <div class="card">
+    <div v-if="cityWeatherData" class="card">
       <div class="card-body">
         <h3 class="color-primary">Welcome, you are now in <span class="font-thin">{{ myCityData.name }}, {{
           myCityData.country }}</span></h3>

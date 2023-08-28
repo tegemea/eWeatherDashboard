@@ -12,7 +12,6 @@ const { loading, locationsHistory: locations } = storeToRefs(locationStore)
   <div class="row">
     <div class="col-12">
       <SearchByName />
-      <div>{{ console.log(locations[0] ?? 'N/A') }}</div>
 
       <div v-if="locations.length" class="card mb-4">
         <div class="card-body">

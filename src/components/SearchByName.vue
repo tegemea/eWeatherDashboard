@@ -6,12 +6,19 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const locationStore = useLocationStore()
-const { loading, locationsHistory, cityNameToSearch, cityChoicesOnSearch } = storeToRefs(locationStore)
+const { loading, locationsHistory, cityNameToSearch, cityChoicesOnSearch, errors } = storeToRefs(locationStore)
 const { getCityWeatherData, getCityChoicesByName, getOnlyMorningData } = locationStore
 
 async function handleSearchButton() {
     router.push('/locations')
     const { data: cityChoices } = await getCityChoicesByName(cityNameToSearch)
+    if (!cityChoices.length) {
+        if (!errors.value.includes(`Sorry, We didn't find city / location named ${cityNameToSearch.value}`)) {
+            errors.value.push(`Sorry, We didn't find city / location named ${cityNameToSearch.value}`)
+        }
+    } else {
+        errors.value = []
+    }
     cityChoicesOnSearch.value = cityChoices
     loading.value = false
 }
@@ -65,6 +72,14 @@ async function handleCityChoice(lat, lon) {
                 {{ cityChoice.country }}
             </button>
         </div>
+    </div>
+    <div v-if="errors.length" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div>
+            <ul class="list-unstyled m-0">
+                <li v-for="(err, i) in errors" :key="i">{{ err }}</li>
+            </ul>
+        </div>
+        <button @click="errors = []" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </template>
 

@@ -26,7 +26,9 @@ function removeLocationinHistory(i) {
                             <th>Weather</th>
                             <th>HIGH</th>
                             <th>LOW</th>
-                            <th class="text-danger">Remove</th>
+                            <th class="text-danger text-center">
+                                <Icon icon="mdi:trash" />
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +40,7 @@ function removeLocationinHistory(i) {
                             </td>
                             <td>{{ location.current?.main?.temp_max }}</td>
                             <td>{{ location.current?.main?.temp_min }}</td>
-                            <td>
+                            <td class="text-center">
                                 <button @click="removeLocationinHistory(i)" class="btn text-danger">
                                     <Icon icon="bi:trash" />
                                 </button>
