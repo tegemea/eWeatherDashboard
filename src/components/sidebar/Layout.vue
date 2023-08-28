@@ -29,7 +29,7 @@ const { locationsHistory } = storeToRefs(locationStore)
                 <div class="card-footer text-danger small">
                     <Icon icon="streamline:interface-alert-warning-circle-warning-alert-frame-exclamation-caution-circle"
                         class="me-2" />
-                    Values not being re-calculated
+                    No values re-calculation
                 </div>
             </div>
             <div class="card mb-3 border-radius-0">

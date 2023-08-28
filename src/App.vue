@@ -12,29 +12,28 @@ const locationStore = useLocationStore()
 <template>
   <div class="container-fluid min-vh-100">
     <div class="row min-vh-100">
-      <div class="col-sm-6 col-md-4 col-xl-3 bg-light sidebar-container">
+      <div class="col-md-5 col-xl-3 bg-light sidebar-container">
         <SidebarLayout class="sidebar" />
       </div>
-      <div class="col-sm-6 col-md-8 col-xl-9 py-3 content">
+      <div class="col-md-7 col-xl-9 py-3 content">
         <RouterView />
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @media screen and (min-width: 768px) {
-  .sidebar-container {}
 
   .sidebar {
     position: sticky;
     position: -webkit-sticky;
     top: 0;
   }
-}
 
-.content {
-  position: relative;
+  .content {
+    position: relative;
+  }
 }
 
 .border-radius-0 {

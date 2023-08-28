@@ -52,15 +52,16 @@ const chartOptions = {
       <div v-if="locations.length" class="card mb-4">
         <div class="card-body">
           <h3 class="color-primary d-flex justify-content-between">
-            <span>Last City Search</span>
+            <span class="d-none d-lg-inline">Last City Search</span>
             <span class="font-thin">
-              Weather for
-              {{ locations[0]?.name }} ({{ locations[0]?.data?.city?.name }}), {{ locations[0]?.data?.city?.country }}
+              <span class="d-none d-xl-inline">Weather for</span>
+              {{ locations[0]?.name }} <span class="d-none d-lg-inline">({{ locations[0]?.data?.city?.name
+              }})</span>, {{ locations[0]?.data?.city?.country }}
             </span>
           </h3>
           <hr />
           <div class="row">
-            <div class="col-md-4 text-black-50">
+            <div class="col-lg-8 col-xl-5 text-black-50">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <h4 class="d-flex justify-content-between">
@@ -91,7 +92,7 @@ const chartOptions = {
                 </li>
               </ul>
             </div>
-            <div class="col-md-4 text-end">
+            <div class="col-lg-4 col-xl-4 text-end">
               <img :src="`https://openweathermap.org/img/wn/${locations[0]?.current?.weather[0]?.icon}@2x.png`" alt="" />
               <span>{{ locations[0]?.current?.weather[0]?.main }}</span>
             </div>
@@ -101,10 +102,13 @@ const chartOptions = {
           <span class="text-black-50">{{ locations[0]?.current?.weather[0]?.description }}</span>
         </div>
       </div>
+
       <div v-if="locations.length" class="card mb-4">
         <h5 class="card-header d-flex justify-content-between">
-          <span>Last City Forecast</span>
-          <strong>{{ locations[0]?.name }} ({{ locations[0]?.data?.city?.name }}) 5 Days Forecast
+          <span class="d-none d-lg-inline">Last City Forecast</span>
+          <strong>{{ locations[0]?.name }} <span class="d-sm-none d-lg-inline">({{ locations[0]?.data?.city?.name
+          }})</span> 5 Days
+            Forecast
             <Icon icon="line-md:moon-filled-to-sunny-filled-loop-transition" />
           </strong>
         </h5>
@@ -112,7 +116,10 @@ const chartOptions = {
           <table class="table">
             <thead>
               <tr class="text-uppercase font-thin">
-                <th>Date, Day & Time of the Day</th>
+                <th>
+                  <span>Date</span>
+                  <span class="d-none d-lg-inline">, Day & Time of the Day</span>
+                </th>
                 <th class="text-center">Weather</th>
                 <th>Low</th>
                 <th>High</th>
@@ -120,10 +127,14 @@ const chartOptions = {
             </thead>
             <tbody>
               <tr v-for="forecast in locations[0]?.data?.forecasts">
-                <td>{{ dayjs(forecast.dt_txt).format('DD MMM YYYY, ddd - HH:mm A') }}</td>
+                <td>
+                  <span>{{ dayjs(forecast.dt_txt).format('DD MMM') }}</span>
+                  <span class="d-none d-md-inline">{{ dayjs(forecast.dt_txt).format(' YYYY') }}</span>
+                  <span class="d-none d-lg-inline">{{ dayjs(forecast.dt_txt).format(', ddd - HH:mm A') }}</span>
+                </td>
                 <td class="text-center">
                   <img :src="`https://openweathermap.org/img/wn/${forecast.weather[0]?.icon}.png`" alt="" />
-                  {{ forecast.weather[0]?.main }}
+                  <span class="d-none d-md-inline">{{ forecast.weather[0]?.main }}</span>
                 </td>
                 <td>{{ forecast.main?.temp_min.toFixed('2') }} {{ tempUnits }}</td>
                 <td>{{ forecast.main?.temp_max.toFixed('2') }} {{ tempUnits }}</td>

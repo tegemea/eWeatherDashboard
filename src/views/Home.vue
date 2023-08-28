@@ -25,7 +25,7 @@ onMounted(() => getLocation())
           myCityData.country }}</span></h3>
         <hr />
         <div class="row">
-          <div class="col-md-4 text-black-50">
+          <div class="col-lg-8 col-xl-5 text-black-50">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <h4 class="d-flex justify-content-between">
@@ -56,7 +56,7 @@ onMounted(() => getLocation())
               </li>
             </ul>
           </div>
-          <div class="col-md-4 text-end">
+          <div class="col-lg-4 col-xl-4 text-end">
             <img :src="`https://openweathermap.org/img/wn/${cityWeatherData?.current?.weather[0]?.icon}@2x.png`" alt="" />
             <span>{{ cityWeatherData?.current?.weather[0]?.main }}</span>
           </div>

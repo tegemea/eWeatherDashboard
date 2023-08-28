@@ -25,7 +25,7 @@ function removeLocationinHistory(i) {
                             <th>Location</th>
                             <th>Weather</th>
                             <th>HIGH</th>
-                            <th>LOW</th>
+                            <th><span class="d-none d-lg-inline">LOW</span></th>
                             <th class="text-danger text-center">
                                 <Icon icon="mdi:trash" />
                             </th>
@@ -36,10 +36,14 @@ function removeLocationinHistory(i) {
                             <td>{{ location.name }}, {{ location.data?.city?.country }}</td>
                             <td>
                                 <img :src="`https://openweathermap.org/img/wn/${location.current?.weather[0]?.icon}.png`" />
-                                {{ location.current?.weather[0]?.main }}
+                                <span class="d-none d-lg-inline">{{ location.current?.weather[0]?.main }}</span>
                             </td>
                             <td>{{ location.current?.main?.temp_max.toFixed('2') }} {{ tempUnits }}</td>
-                            <td>{{ location.current?.main?.temp_min.toFixed('2') }} {{ tempUnits }}</td>
+                            <td>
+                                <span class="d-none d-lg-inline">
+                                    {{ location.current?.main?.temp_min.toFixed('2') }} {{ tempUnits }}
+                                </span>
+                            </td>
                             <td class="text-center">
                                 <button @click="removeLocationinHistory(i)" class="btn text-danger">
                                     <Icon icon="bi:trash" />

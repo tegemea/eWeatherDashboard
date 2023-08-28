@@ -44,13 +44,15 @@ async function handleCityChoice(lat, lon) {
     <div class="card mb-4 border-0 main">
         <div class="card-body p-0">
             <div class="row">
-                <div class="col-md-9 mb-2">
+                <div class="col-md-8 mb-2">
                     <input type="search" @keyup.enter="handleSearchButton" v-model="cityNameToSearch"
                         class="form-control form-control-lg" placeholder="Type city name and Enter to search" />
                 </div>
-                <div class="col-md-3 mb-2">
+                <div class="col-md-4 mb-2">
                     <button @click.prevent="handleSearchButton" class="btn btn-lg btn-outline-info w-100">
-                        <Icon icon="iconamoon:search-fill" />
+                        <span class="d-md-none d-lg-inline">
+                            <Icon icon="iconamoon:search-fill" class="me-2" />
+                        </span>
                         Search
                     </button>
                 </div>
@@ -85,7 +87,7 @@ async function handleCityChoice(lat, lon) {
 
 <style lang="scss" scoped>
 .main {
-    position: relative;
+    // position: relative;
 
     .overlay {
         position: absolute;
